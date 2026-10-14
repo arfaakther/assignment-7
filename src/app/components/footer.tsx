@@ -3,7 +3,7 @@
 const Footer = () => {
     return (
 
-<div className="flex flex-col text-gray-500 md:flex-row justify-between items-start md:items-center gap-2 md:gap-4 border border-gray-100 p-4">
+<div className="flex flex-col text-gray-500 bg-base-100 md:flex-row justify-between items-start md:items-center gap-2 md:gap-4 border-t border-gray-200 p-6">
   <div>
     বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
   </div>

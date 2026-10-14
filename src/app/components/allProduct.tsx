@@ -1,0 +1,74 @@
+
+
+const AllProducts = async() => {
+    const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
+    const data = await res.json();
+    return (
+  
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {data.map((item) => {
+    const unit = item.unit;
+    let unitBn = unit;
+
+    if (unit === "kg") unitBn = "কেজি";
+    if (unit === "litre") unitBn = "লিটার";
+    if (unit === "dozen") unitBn = "ডজন";
+    if (unit === "piece") unitBn = "পিস";
+
+    return (
+      <div
+        key={item.id}
+        className="card bg-base-100 w-full shadow-sm border border-gray-200"
+      >
+        <div className="card-body gap-3">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">{item.image}</span>
+
+            <div>
+              <h2 className="card-title text-xl">
+                {item.nameBn}
+              </h2>
+              <p className="text-gray-500 text-sm">
+                প্রতি {unitBn}
+              </p>
+            </div>
+          </div>
+
+          <div className=" flex justify-between mt-3">
+            <div><p className="text-gray-500 text-sm mb-1">
+              আজকের দাম
+            </p>
+            <p className="text-2xl font-bold">
+              {item.today.toLocaleString("bn-BD")} টাকা
+            </p></div>
+          
+
+          <div className="flex justify-end pt-3">
+            <div className="btn p-2 rounded-2xl text-sm h-6">
+              {item.change.dir === "up" ? (
+                <span className="text-green-700">
+                  ▲ {item.change.pct.toLocaleString("bn-BD")}%
+                </span>
+              ) : item.change.dir === "down" ? (
+                <span className="text-red-600">
+                  ▼ {item.change.pct.toLocaleString("bn-BD")}%
+                </span>
+              ) : (
+                <span className="text-gray-500">
+                  — {item.change.pct.toLocaleString("bn-BD")}%
+                </span>
+              )}
+            </div>
+          </div>
+ </div>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
+    );
+};
+
+export default AllProducts;

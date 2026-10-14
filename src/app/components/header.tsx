@@ -1,12 +1,13 @@
-'use client'
-
 import Image from "next/image";
 
 
 const Header = () => {
+     const date = new Date().toLocaleDateString("bn-BD", {
+  dateStyle: "full",
+});
     return (
- <div className=" border border-gray-100">     
-<div className="flex flex-col container mx-auto sm:flex-row sm:justify-between sm:items-center gap-4 p-8">
+ <div className=" border-b border-gray-100 bg-base-100">     
+<div className="flex flex-col container mx-auto sm:flex-row sm:justify-between sm:items-center gap-4 p-4">
 
   <div className="flex items-center gap-3">
     <div className="w-10 h-10 bg-green-700 rounded-[10px] flex items-center justify-center shrink-0">
@@ -23,12 +24,7 @@ const Header = () => {
       <h1 className="text-2xl font-bold">বাজার দর</h1>
 
       <div className="text-gray-600">
-        {new Date().toLocaleDateString("bn-BD", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
+        {date}
       </div>
     </div>
   </div>

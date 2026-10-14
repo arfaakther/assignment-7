@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import Category from "./components/category";
+import Marquee from "./components/marquee";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin","bengali"],
@@ -22,9 +23,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
       className={`${notoSerifBengali.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-base-300">
         <Header></Header>
         <Category></Category>
+        <Marquee></Marquee>
         {children}
         <h1>hello</h1>
         <Footer></Footer>
