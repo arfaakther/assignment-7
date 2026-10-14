@@ -15,7 +15,7 @@ const Category = async() => {
         <div className=" container mx-auto flex gap-3">
            
             {
-                data.map(item => <Link key={item.id} href={`/${item.slug}`} className="flex gap-1 m-3 p-2 hover:btn rounded-[10px]"><div>{item.icon}</div>
+                data.map(item => <Link key={item.id} href={`/categories/${item.slug}`} className="flex gap-1 m-3 p-2 hover:btn rounded-[10px]"><div>{item.icon}</div>
                     <h1>{item.nameBn}</h1>
                 </Link>)
             }</div>

@@ -28,7 +28,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Category></Category>
         <Marquee></Marquee>
         {children}
-        <h1>hello</h1>
         <Footer></Footer>
         </body>
     </html>

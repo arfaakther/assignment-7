@@ -1,14 +1,28 @@
 
-
+interface IProducts{
+    image: string,
+    nameBn: string,
+  id: number,
+  unit: string,
+  today: number,
+  change: {
+    dir: string,
+    pct:number,
+  }
+  
+}
 const AllProducts = async() => {
     const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
-    const data = await res.json();
+    const data:IProducts[] = await res.json();
     return (
-  
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mb-16 py-4">
+        <h1 className="text-2xl font-bold py-4">সব পণ্য</h1>
+        <p  className="pb-4 text-grey-500">মোট {data.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
   {data.map((item) => {
     const unit = item.unit;
-    let unitBn = unit;
+    let unitBn:string = unit;
 
     if (unit === "kg") unitBn = "কেজি";
     if (unit === "litre") unitBn = "লিটার";
@@ -22,7 +36,7 @@ const AllProducts = async() => {
       >
         <div className="card-body gap-3">
           <div className="flex items-center gap-3">
-            <span className="text-3xl">{item.image}</span>
+            <span className="text-3xl bg-base-300 rounded-2xl p-2">{item.image}</span>
 
             <div>
               <h2 className="card-title text-xl">
@@ -46,11 +60,11 @@ const AllProducts = async() => {
           <div className="flex justify-end pt-3">
             <div className="btn p-2 rounded-2xl text-sm h-6">
               {item.change.dir === "up" ? (
-                <span className="text-green-700">
+                <span className="text-red-700">
                   ▲ {item.change.pct.toLocaleString("bn-BD")}%
                 </span>
               ) : item.change.dir === "down" ? (
-                <span className="text-red-600">
+                <span className="text-green-700">
                   ▼ {item.change.pct.toLocaleString("bn-BD")}%
                 </span>
               ) : (
@@ -65,7 +79,8 @@ const AllProducts = async() => {
       </div>
     );
   })}
-</div>
+        </div>
+      </div>
 
 
     );

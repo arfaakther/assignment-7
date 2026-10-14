@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 
 const Header = () => {
@@ -20,13 +21,12 @@ const Header = () => {
       />
     </div>
 
-    <div>
+    <Link href="/">
       <h1 className="text-2xl font-bold">বাজার দর</h1>
-
-      <div className="text-gray-600">
+<div className="text-gray-600">
         {date}
       </div>
-    </div>
+    </Link>
   </div>
 
   <div className="flex items-center gap-3">
