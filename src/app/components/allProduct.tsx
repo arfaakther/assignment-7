@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 interface IProducts{
     image: string,
@@ -13,9 +14,11 @@ interface IProducts{
 }
 const AllProducts = async() => {
     const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
-    const data:IProducts[] = await res.json();
-    return (
-      <div className="mb-16 py-4">
+  const data: IProducts[] = await res.json();
+  
+  return (
+      
+      <div id="AllProducts" className="mb-16 py-4">
         <h1 className="text-2xl font-bold py-4">সব পণ্য</h1>
         <p  className="pb-4 text-grey-500">মোট {data.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -30,6 +33,7 @@ const AllProducts = async() => {
     if (unit === "piece") unitBn = "পিস";
 
     return (
+      <Link href={`/items/${item.id}`} key={item.id}>
       <div
         key={item.id}
         className="card bg-base-100 w-full shadow-sm border border-gray-200"
@@ -76,7 +80,7 @@ const AllProducts = async() => {
           </div>
  </div>
         </div>
-      </div>
+      </div></Link>
     );
   })}
         </div>

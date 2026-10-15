@@ -1,6 +1,6 @@
 
-
-const ProductId = async ({ params }) => {
+import Link from "next/link";
+const ProductId = async ({ params }:{params:{id:number}}) => {
     const { id } = await params;
     
     const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products?category=${id}`);
@@ -44,7 +44,8 @@ const ProductId = async ({ params }) => {
     if (unit === "dozen") unitBn = "ডজন";
     if (unit === "piece") unitBn = "পিস";
 
-    return (
+              return (
+      <Link href={`/items/${item.id}`} key={item.id}>
       <div
         key={item.id}
         className="card bg-base-100 w-full shadow-sm border border-gray-200"
@@ -91,7 +92,7 @@ const ProductId = async ({ params }) => {
           </div>
  </div>
         </div>
-      </div>
+      </div></Link>
     );
   })}
         </div></div>

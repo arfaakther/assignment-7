@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface IProducts {
   image: string;
   nameBn: string;
@@ -13,12 +15,14 @@ interface IProducts {
 const PriceDown = async() => {
     const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   const data: IProducts[] = await res.json();
-   const filteredData = data
+  const filteredData = data
   .filter((item) => item.change.dir === "down")
   .sort((a, b) => a.change.pct - b.change.pct)
   .slice(0, 6);
+  
 
-    return (
+  return (
+      
         <div className="py-4">
             <h1 className="text-2xl font-bold py-4"><span className="text-green-700">▲</span> আজ দাম কমেছে</h1>
         
@@ -33,7 +37,7 @@ const PriceDown = async() => {
         if (unit === "piece") unitBn = "পিস";
 
           return (
-            
+             <Link href={`/items/${item.id}`} key={item.id}>
           <div
             key={item.id}
             className="card bg-base-100 w-full shadow-sm border border-gray-200"
@@ -73,7 +77,7 @@ const PriceDown = async() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div></Link>
         );
       })}
     </div></div>

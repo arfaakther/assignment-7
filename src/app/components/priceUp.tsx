@@ -1,3 +1,4 @@
+import Link from "next/link";
 interface IProducts {
   image: string;
   nameBn: string;
@@ -19,7 +20,8 @@ const PriceUp = async () => {
   .sort((a, b) => b.change.pct - a.change.pct)
   .slice(0, 6);
 
-    return (
+  return (
+      
         <div className="py-4">
             <h1 className="text-2xl font-bold py-4"><span className="text-red-700">▲</span> আজ দাম বেড়েছে</h1>
         
@@ -34,7 +36,7 @@ const PriceUp = async () => {
         if (unit === "piece") unitBn = "পিস";
 
           return (
-            
+            <Link href={`/items/${item.id}`} key={item.id}>
           <div
             key={item.id}
             className="card bg-base-100 w-full shadow-sm border border-gray-200"
@@ -74,7 +76,7 @@ const PriceUp = async () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div></Link>
         );
       })}
     </div></div>
