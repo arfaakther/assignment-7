@@ -30,8 +30,8 @@ const Header = () => {
   </div>
 
   <div className="flex items-center gap-3">
-    <button className="btn text-[16px] hover:bg-grey-300 rounded-[8px]">সাইন ইন</button>
-    <button className="btn bg-green-700 text-[16px] text-white rounded-[8px] hover:bg-green-800">সাইন আপ</button>
+    <Link href={'/signin'} className="btn text-[16px] hover:bg-grey-300 rounded-[8px]">সাইন ইন</Link>
+    <Link href={'/signup'} className="btn bg-green-700 text-[16px] text-white rounded-[8px] hover:bg-green-800">সাইন আপ</Link>
   </div>
 </div>
 </div>
