@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+
 interface Icategory {
   id: string;
   nameBn: string;
@@ -13,8 +14,8 @@ interface Icategory {
 
 const CategoryLinks = ({ data }: { data: Icategory[] }) => {
   const userPath = usePathname();
-
-  return (
+  
+return (
     <div className="border-b border-gray-100 bg-base-100">
       <div className="container mx-auto flex gap-3 overflow-x-auto">
         {data.map((item) => (

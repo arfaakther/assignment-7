@@ -1,6 +1,27 @@
+"use client"
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import React from "react";
 
 const SignUpPage = () => {
+
+    const onSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const user = Object.fromEntries(formData.entries()) as {name:string, email:string, password:string}
+       const {data,error}= await authClient.signUp.email({
+            ...user,
+            callbackURL:"/",
+        })
+        if(data){
+            console.log(data);
+          redirect("/signin");
+        }
+        if(error){
+            console.log(error)
+        }
+    }
     return (
         <div>
             <div className="grid justify-center text-center mt-8">
@@ -8,23 +29,23 @@ const SignUpPage = () => {
             <p className="text-grey-400">বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।</p></div>
         <div className="flex justify-center mt-5">
 
-            <form>
+            <form onSubmit={onSubmit}>
                 <fieldset className="fieldset bg-base-200 border-base-300 px-8 rounded-2xl border border-grey-300 w-md border">
 
 
   <label className="label text-black text-xl py-2">নাম</label>
-  <input type="text" className="input text-[16px] w-full rounded-xl" placeholder="যেমন: রহিম উদ্দিন" />
+  <input name="name" type="text" className="input text-[16px] w-full rounded-xl" placeholder="যেমন: রহিম উদ্দিন" />
   <label className="label text-black text-xl py-2">ইমেইল</label>
-  <input type="email" className="input text-[16px] w-full rounded-xl" placeholder="you@example.com" />
+  <input name="email" type="email" className="input text-[16px] w-full rounded-xl" placeholder="you@example.com" />
   
                     <label className="label text-black text-xl py-2">পাসওয়ার্ড</label>
-  <input type="password" className="input text-[16px] w-full rounded-xl" placeholder="কমপক্ষে ৮ অক্ষর" />
+  <input name="password" type="password" className="input text-[16px] w-full rounded-xl" placeholder="কমপক্ষে ৮ অক্ষর" />
   
                     <label className="label text-black text-xl py-2">পাসওয়ার্ড নিশ্চিত করুন</label>
-  <input type="password" className="input text-[16px] w-full rounded-xl" placeholder="আবার লিখুন" />
+  <input name="confirmPassword" type="password" className="input text-[16px] w-full rounded-xl" placeholder="আবার লিখুন" />
 
 
-  <button className="btn bg-green-700 text-white my-4 w-full rounded-xl ">অ্যাকাউন্ট তৈরি করুন</button>
+  <button type="submit" className="btn bg-green-700 text-white my-4 w-full rounded-xl ">অ্যাকাউন্ট তৈরি করুন</button>
 <div className="flex items-center gap-3 my-4">
   <hr className="flex-1 border-gray-300" />
   <span className="text-[16px]">অথবা</span>
