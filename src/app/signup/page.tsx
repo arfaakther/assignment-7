@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignUpPage = () => {
 
@@ -15,11 +16,11 @@ const SignUpPage = () => {
             callbackURL:"/",
         })
         if(data){
-            console.log(data);
+            toast.success("আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
           redirect("/signin");
         }
         if(error){
-            console.log(error)
+            toast.error("অ্যাকাউন্ট তৈরি করা যায়নি। আবার চেষ্টা করুন।")
         }
     }
     return (

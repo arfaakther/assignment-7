@@ -1,5 +1,27 @@
+"use client"
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
+
 const SignInPage = () => {
+    const onSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
+            e.preventDefault()
+            const formData = new FormData(e.target)
+            const user = Object.fromEntries(formData.entries()) as {email:string, password:string}
+           console.log(user)
+            const {data,error}= await authClient.signIn.email({
+                ...user,
+                callbackURL:"/",
+            })
+            if(data){
+                toast.success("সফলভাবে সাইন ইন হয়েছে!");
+              
+            }
+            if(error){
+                toast.error("সাইন ইন করা যায়নি। ইমেইল ও পাসওয়ার্ড যাচাই করুন।")
+            }
+        }
     return (
         <div>
             <div className="grid justify-center text-center mt-8">
@@ -7,20 +29,20 @@ const SignInPage = () => {
             <p className="text-grey-400">বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।</p></div>
         <div className="flex justify-center mt-5">
 
-            <form>
+            <form onSubmit={onSubmit}>
                 <fieldset className="fieldset bg-base-200 border-base-300 px-8 rounded-2xl border border-grey-300 w-md border">
 
 
  
   <label className="label text-black text-xl py-2">ইমেইল</label>
-  <input type="email" className="input text-[16px] w-full rounded-xl" placeholder="you@example.com" />
+  <input name="email" type="email" className="input text-[16px] w-full rounded-xl" placeholder="you@example.com" />
   <label className="label text-black text-xl py-2">পাসওয়ার্ড</label>
-  <input type="password" className="input text-[16px] w-full rounded-xl" placeholder="কমপক্ষে ৮ অক্ষর" />
+  <input name="password" type="password" className="input text-[16px] w-full rounded-xl" placeholder="কমপক্ষে ৮ অক্ষর" />
   
                     
 
 
-  <button className="btn bg-green-700 text-white my-4 w-full rounded-xl ">সাইন ইন</button>
+  <button type="submit" className="btn bg-green-700 text-white my-4 w-full rounded-xl ">সাইন ইন</button>
 <div className="flex items-center gap-3 my-4">
   <hr className="flex-1 border-gray-300" />
   <span className="text-[16px]">অথবা</span>

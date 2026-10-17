@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import toast, { Toaster } from 'react-hot-toast';
 
 const UserInfo = () => {
     const {data: session}= authClient.useSession()
@@ -8,6 +9,7 @@ const UserInfo = () => {
 
     const handleSignOut=async()=>{
         await authClient.signOut();
+         toast.success("সাইন আউট হয়েছে!");
 }
     
     return (
