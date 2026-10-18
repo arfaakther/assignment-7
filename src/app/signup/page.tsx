@@ -23,6 +23,18 @@ const SignUpPage = () => {
             toast.error("অ্যাকাউন্ট তৈরি করা যায়নি। আবার চেষ্টা করুন।")
         }
     }
+    const handleGoogleSignUp = async () => {
+             await authClient.signIn.social({
+        provider: "google",
+      });
+    }
+    
+          const handleGithubSignUp = async () => {
+                 await authClient.signIn.social({
+            provider: "github",
+          });
+    }
+    
     return (
         <div>
             <div className="grid justify-center text-center mt-8">
@@ -53,8 +65,8 @@ const SignUpPage = () => {
   <hr className="flex-1 border-gray-300" />
                         </div>
                         <div className="flex justify-between">
-                            <button className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> Google দিয়ে<br/>চালিয়ে যান</button>
-                            <button className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> GitHub দিয়ে<br/>চালিয়ে যান</button>
+                            <button type="button" onClick={handleGoogleSignUp} className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> Google দিয়ে<br/>চালিয়ে যান</button>
+                            <button type="button" onClick={handleGithubSignUp} className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> GitHub দিয়ে<br/>চালিয়ে যান</button>
                         </div>
                         <h1 className="text-center text-[16px] my-5">অ্যাকাউন্ট আছে? <Link href={'/signin'} className="text-green-700 underline"> সাইন ইন করুন </Link></h1>
 </fieldset>

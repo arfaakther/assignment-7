@@ -21,7 +21,20 @@ const SignInPage = () => {
             if(error){
                 toast.error("সাইন ইন করা যায়নি। ইমেইল ও পাসওয়ার্ড যাচাই করুন।")
             }
-        }
+    }
+    
+    const handleGoogleSignIn = async () => {
+        await authClient.signIn.social({
+    provider: "google",
+  });
+    }
+    const handleGithubSignIn = async () => {
+         await authClient.signIn.social({
+    provider: "github",
+  });
+    }
+
+
     return (
         <div>
             <div className="grid justify-center text-center mt-8">
@@ -49,8 +62,8 @@ const SignInPage = () => {
   <hr className="flex-1 border-gray-300" />
                         </div>
                         <div className="flex justify-between">
-                            <button className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> Google দিয়ে<br/>চালিয়ে যান</button>
-                            <button className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> GitHub দিয়ে<br/>চালিয়ে যান</button>
+                            <button type="button" onClick={handleGoogleSignIn} className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> Google দিয়ে<br/>চালিয়ে যান</button>
+                            <button type="button" onClick={handleGithubSignIn} className="btn border border-black rounded-[10px] text-[16px] px-11 py-6"><span></span> GitHub দিয়ে<br/>চালিয়ে যান</button>
                         </div>
                         <h1 className="text-center text-[16px] my-5">অ্যাকাউন্ট নেই? <Link href={'/signup'} className="text-green-700 underline"> সাইন আপ করুন </Link></h1>
 </fieldset>

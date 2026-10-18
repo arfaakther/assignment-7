@@ -5,11 +5,13 @@ import UserInfo from "./userInfo";
 
 
 const Header = () => {
+   
      const date = new Date().toLocaleDateString("bn-BD", {
   dateStyle: "full",
 });
     return (
- <div className=" border-b border-gray-100 bg-base-100">     
+ <div className=" border-b border-gray-100 bg-base-100"> 
+   
 <div className="flex flex-col container mx-auto sm:flex-row sm:justify-between sm:items-center gap-4 p-4">
 
   <div className="flex items-center gap-3">

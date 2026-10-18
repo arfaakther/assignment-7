@@ -21,7 +21,7 @@ const Marquee = async() => {
     const filteredData = data.filter(d=>d.change.dir!=="flat")
     return (
         <div className="border-b border-gray-100 py-2 bg-base-100">
-            <MarqueeText direction="right" duration={10}>
+            <MarqueeText direction="right" duration={10} pauseOnHover>
             {
                 filteredData.map(item=> <span key={item.id} className="m-4 ">
                     <span>{item.image} </span>
