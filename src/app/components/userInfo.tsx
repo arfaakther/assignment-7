@@ -5,11 +5,11 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const UserInfo = () => {
     const {data: session}= authClient.useSession()
-    const user = session?.user
+    const user = session?.user;
 
     const handleSignOut=async()=>{
         await authClient.signOut();
-         toast.success("সাইন আউট হয়েছে!");
+         toast.success("সফলভাবে সাইন আউট হয়েছে!");
 }
     
     return (
@@ -24,15 +24,15 @@ const UserInfo = () => {
                         <div tabIndex={0} role="button" className="btn m-1">
                               
                                   <div className="avatar">
-                                    <div className="w-8 m-1 rounded border ">
-    <img alt="profile" src={user?.image} />
+                                    <div className="w-8 m-1 rounded-[8px] border">
+    <img alt="profile" src={user?.image as string} />
   </div>
 </div>
     <h1>{user?.name} ▾</h1>
 </div>
                         {/* <p>{user?.email}</p> */}
   <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li className="text-[18px]"><a><span>👤</span>আমার প্রোফাইল</a></li>
+    <li className="text-[18px]"><Link href={'/profile'}><span>👤</span>আমার প্রোফাইল</Link></li>
     <li>   <button onClick={handleSignOut} className=" text-red-700 text-[18px]">↩ সাইন আউট</button>
 </li>
   </ul>
