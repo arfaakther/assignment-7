@@ -1,16 +1,43 @@
 
-
+  
 import CategoryProducts from "@/app/components/categoryProducts";
+import { notFound } from "next/navigation";
+
+interface IProduct {
+  id: number;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: {
+    dir: string;
+    pct: number;
+  };
+}
+
+interface ICategory {
+  icon: string;
+  nameBn: string;
+}
 const ProductId = async ({ params }:{params:{id:number}}) => {
     const { id } = await params;
     
     const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products?category=${id}`);
-    const data = await res.json();
-    
-
-    const product = await fetch(`https://api.api-store.workers.dev/api/bazardor/categories/${id}`);
-    const productData = await product.json();
-    
+    const data:IProduct[] = await res.json();
+     
+  const product = await fetch(`https://api.api-store.workers.dev/api/bazardor/categories/${id}`);
+    const productData:ICategory = await product.json();
+      
+    if (!productData || !productData.nameBn || !Array.isArray(data)) {
+    notFound();
+  }
 
     return (
         <div className="container mx-auto">

@@ -10,8 +10,13 @@ const SignUpPage = () => {
     const onSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        const user = Object.fromEntries(formData.entries()) as {name:string, email:string, password:string}
-       const {data,error}= await authClient.signUp.email({
+        const user = Object.fromEntries(formData.entries()) as {name:string, email:string, password:string, confirmPassword:string}
+       
+       if (user.password !== user.confirmPassword) {
+  toast.error("পাসওয়ার্ড দুটি মেলেনি!");
+  return;
+}
+        const { data, error } = await authClient.signUp.email({
             ...user,
             callbackURL:"/",
         })
@@ -43,7 +48,7 @@ const SignUpPage = () => {
         <div className="flex justify-center mt-5">
 
             <form onSubmit={onSubmit}>
-                <fieldset className="fieldset bg-base-200 border-base-300 px-8 rounded-2xl border border-grey-300 w-md border">
+                <fieldset className="fieldset bg-base-200 border-base-300 px-8 rounded-2xl border border-grey-300 w-md">
 
 
   <label className="label text-black text-xl py-2">নাম</label>

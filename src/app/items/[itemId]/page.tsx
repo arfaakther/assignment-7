@@ -1,30 +1,69 @@
 import Link from "next/link";
+import {notFound} from "next/navigation";
 
-const ItemsDetails = async ({ params }:{params:{itemId:number}}) => {
-    const { itemId } = await params;
-    const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products/${itemId}`);
-    const data = await res.json();
-   
-const minPrice = Math.min(...data.markets.map((market) => market.min));
+interface IData{
+   id: number,
+  slug: string,
+  nameBn: string,
+  category: string,
+  categoryNameBn: string,
+  categoryIcon: string,
+  unit: string,
+  image: string,
+  today: number,
+  yesterday: number,
+  lastWeek: number,
+  lastMonth: number,
+  change: {
+    dir: string,
+    pct: number
+  },
+  markets: 
+  {
+      id?: number;
+    market: string;
+    name?: string;
+    division: string;
+    divisionBn?: string;
+    min: number;
+    max: number;
+    }[];
+}
+const ItemsDetails = async ({
+  params,
+}: {
+  params: Promise<{ itemId: string }>;
+}) => {
+  const { itemId } = await params;
 
-const maxPrice = Math.max(...data.markets.map((market) => market.max));
+  const res = await fetch(
+    `https://api.api-store.workers.dev/api/bazardor/products/${itemId}`
+  );
 
-const avgPrice = Math.round(
-  data.markets.reduce(
-    (total, market) => total + (market.min + market.max) / 2,
-    0
-  ) / data.markets.length
-);
+  const data: IData = await res.json();
 
+  if (!data.markets) {
+    notFound();
+  }
 
-    
-const unit = data.unit;
-let unitBn: string = unit;
+  const minPrice = Math.min(...data.markets.map((market) => market.min));
 
-if (unit === "kg") unitBn = "কেজি";
-if (unit === "litre") unitBn = "লিটার";
-if (unit === "dozen") unitBn = "ডজন";
-if (unit === "piece") unitBn = "পিস";
+  const maxPrice = Math.max(...data.markets.map((market) => market.max));
+
+  const avgPrice = Math.round(
+    data.markets.reduce(
+      (total, market) => total + (market.min + market.max) / 2,
+      0
+    ) / data.markets.length
+  );
+
+  const unit = data.unit;
+  let unitBn: string = unit;
+
+  if (unit === "kg") unitBn = "কেজি";
+  if (unit === "litre") unitBn = "লিটার";
+  if (unit === "dozen") unitBn = "ডজন";
+  if (unit === "piece") unitBn = "পিস";
 
   return (
   <div>

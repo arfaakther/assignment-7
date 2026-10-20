@@ -1,14 +1,14 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import UserInfo from "./userInfo";
+import DateDisplay from "./date";
 
 
 
 const Header = () => {
-   
-     const date = new Date().toLocaleDateString("bn-BD", {
-  dateStyle: "full",
-});
+  
+
     return (
  <div className=" border-b border-gray-100 bg-base-100"> 
    
@@ -28,7 +28,7 @@ const Header = () => {
     <Link href="/">
       <h1 className="text-2xl font-bold">বাজার দর</h1>
 <div className="text-gray-600">
-        {date}
+         <DateDisplay />
       </div>
     </Link>
   </div>

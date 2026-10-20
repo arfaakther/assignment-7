@@ -16,7 +16,9 @@ interface IProducts{
 
 
 const Marquee = async() => {
-    const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
+    const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products',{
+    next: { revalidate: 300 },
+  });
     const data:IProducts[] = await res.json();
     const filteredData = data.filter(d=>d.change.dir!=="flat")
     return (

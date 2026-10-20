@@ -13,7 +13,9 @@ interface IProducts{
   
 }
 const AllProducts = async() => {
-    const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
+    const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products',{
+    next: { revalidate: 300 },
+  });
   const data: IProducts[] = await res.json();
   
   return (

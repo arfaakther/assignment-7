@@ -9,7 +9,8 @@ const ProfilePage = () => {
 
         const handleSignOut=async()=>{
         await authClient.signOut();
-         toast.success("সফলভাবে সাইন আউট হয়েছে!");
+          toast.success("সফলভাবে সাইন আউট হয়েছে!");
+           window.location.href = "/";
 }
 const handleProfileUpdate = async(e:React.SubmitEvent<HTMLElement>)=>{
     e.preventDefault()
@@ -39,10 +40,10 @@ const handleProfileUpdate = async(e:React.SubmitEvent<HTMLElement>)=>{
 
         <div className="min-w-0">
           <h1 className="text-lg font-bold">
-            {user?.name}
+            {user?.name as string}
           </h1>
           <p className="text-sm text-gray-500 break-all">
-            {user?.email}
+            {user?.email as string}
           </p>
         </div>
       </div>

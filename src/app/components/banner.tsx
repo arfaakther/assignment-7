@@ -1,11 +1,8 @@
 import Image from "next/image";
+import DateDisplay from "./date";
 
 const Banner = () => {
-   const date = new Date().toLocaleDateString("bn-BD", {
-  dateStyle: "full",
-});
-
-console.log(date);
+  
     return (
         <div className="border border-gray-200 rounded-3xl mx-20 my-5 bg-base-100">
              <div className=" w-full min-h-[400px] rounded-xl overflow-hidden flex flex-col lg:flex-row-reverse items-center justify-between gap-8 lg:gap-12 px-4 lg:px-12 lg:py-8">
@@ -16,7 +13,7 @@ console.log(date);
             <div className="w-full lg:w-1/2 text-center lg:text-left">
             
                                 <div className="mb-3 text-center text-green-600 w-[200px] rounded-[10px] bg-green-100">
-                        <div >{ date}</div>
+                        <div ><DateDisplay /></div>
 </div>
             
                                 <h1 className="text-5xl font-bold leading-tight">আজকের বাজারের দাম এক নজরে
