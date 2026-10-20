@@ -22,7 +22,7 @@ const SignUpPage = () => {
         })
         if(data){
             toast.success("আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
-          redirect("/signin");
+          redirect("/");
         }
         if(error){
             toast.error("অ্যাকাউন্ট তৈরি করা যায়নি। আবার চেষ্টা করুন।")
